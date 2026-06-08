@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Real-Time News Matrix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header class="glass-element">
+        <div class="header-container" style="justify-content: flex-end;">
+            <button id="theme-toggle" class="glass-btn">Toggle Theme</button>
+        </div>
+    </header>
+
+    <section class="search-section glass-element">
+        <h2>Comprehensive Global & Local News Feed</h2>
+        <p>Type your preferred destination or explore our specialized structural news columns below.</p>
+        <div class="search-box">
+            <input type="text" id="location-input" placeholder="Search city or country (e.g., India, London, Tokyo, Kerala)..." autocomplete="off">
+            <button id="search-btn" class="search-submit-btn">Search Region</button>
+        </div>
+    </section>
+
+    <nav class="category-nav-container">
+        <div class="category-scroll glass-element">
+            <div class="nav-segment">
+                <span class="segment-label">Main Core</span>
+                <button class="nav-tab active" data-category="general">Breaking News</button>
+                <button class="nav-tab" data-category="nation">National</button>
+                <button class="nav-tab" data-category="world">International</button>
+                <button class="nav-tab" data-category="local">Local News</button>
+            </div>
+            <div class="nav-divider"></div>
+            <div class="nav-segment">
+                <span class="segment-label">Specialized Columns</span>
+                <button class="nav-tab" data-category="business">Business & Economy</button>
+                <button class="nav-tab" data-category="technology">Science & Tech</button>
+                <button class="nav-tab" data-category="sports">Sports Radar</button>
+                <button class="nav-tab" data-category="entertainment">Entertainment</button>
+                <button class="nav-tab premium-badge" data-category="markets">Markets Monitor</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-layout">
+        <section class="news-container">
+            <h3 class="feed-title">
+                Active Stream: <span id="current-location-heading">Global Feed</span> 
+                <span id="current-category-heading" class="category-badge">BREAKING NEWS</span>
+            </h3>
+            
+            <div id="news-feed" class="news-grid-wrapper">
+                </div>
+        </section>
+
+        <aside class="sidebar-panel glass-element">
+            <div class="newsletter-box" style="margin-top: 0;">
+                <h4>System Telemetry</h4>
+                <div id="api-status-pill" class="status-indicator online">Connected to Live Feed</div>
+                <p class="telemetry-text">
+                    Data streams are requested in real-time. Speech assistance profile optimized for clear, natural female acoustics.
+                </p>
+            </div>
+        </aside>
+    </main>
+
+    <div class="news-modal-overlay" id="newsModal">
+        <div class="news-modal-window glass-element">
+            <button class="modal-close-trigger" id="closeModal">&times;</button>
+            <div class="modal-hero-wrapper">
+                <img id="modalImg" src="" alt="News Frame Context">
+            </div>
+            <div class="modal-body-content">
+                <span class="modal-date-stamp" id="modalDate"></span>
+                <h2 id="modalTitle"></h2>
+                <div class="modal-text-scroller">
+                    <p id="modalText"></p>
+                </div>
+                <div class="modal-footer-actions">
+                    <a id="modalSourceLink" href="#" target="_blank" class="search-submit-btn spec-link">Read Original Article</a>
+                    <button class="glass-btn variant-close" id="modalCloseBtn">Close View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

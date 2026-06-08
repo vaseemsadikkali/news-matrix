@@ -1,0 +1,195 @@
+/* ==========================================
+   1. GLOBAL SYSTEM DESIGN VARIABLES & RESETS
+   ========================================== */
+:root {
+    --bg-gradient: linear-gradient(135deg, #040712 0%, #080d1a 50%, #12071b 100%);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-hover-bg: rgba(255, 255, 255, 0.06);
+    --glass-hover-border: rgba(56, 189, 248, 0.35);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-blue: #38bdf8;
+    --accent-purple: #c084fc;
+    --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #010205 0%, #03060d 100%);
+    --glass-bg: rgba(0, 0, 0, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.03);
+    --glass-hover-bg: rgba(255, 255, 255, 0.02);
+    --glass-hover-border: rgba(192, 132, 252, 0.25);
+    --text-muted: #64748b;
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-main);
+    min-height: 100vh;
+    padding-bottom: 60px;
+    overflow-x: hidden;
+}
+
+/* Ambient Ambient Light Filters */
+.glow-orb {
+    position: fixed; border-radius: 50%; filter: blur(150px); z-index: -1; opacity: 0.18;
+    pointer-events: none;
+}
+.orb-1 { top: -15%; left: 15%; width: 600px; height: 600px; background: radial-gradient(circle, #0284c7, transparent); }
+.orb-2 { bottom: 5%; right: 5%; width: 500px; height: 500px; background: radial-gradient(circle, #7c3aed, transparent); }
+
+/* Premium Frosted Glass Container Layout Rule */
+.glass-element {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================
+   2. HEADER, SEARCH BANNER & CATEGORIES
+   ========================================== */
+header { margin: 24px auto; width: 90%; max-width: 1200px; padding: 16px 28px; }
+.header-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; color: #fff; }
+.logo span { background: rgba(56, 189, 248, 0.12); color: var(--accent-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 8px; border-radius: 6px; vertical-align: middle; margin-left: 6px; }
+
+.search-section { margin: 0 auto 24px auto; width: 90%; max-width: 1200px; padding: 48px 32px; text-align: center; }
+.search-section h2 { font-size: 2rem; margin-bottom: 8px; font-weight: 700; letter-spacing: -0.5px; }
+.search-section p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
+
+.search-box { display: flex; gap: 12px; max-width: 580px; margin: 0 auto; }
+.search-box input {
+    flex: 1; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border);
+    padding: 14px 22px; border-radius: 30px; color: white; outline: none; font-size: 0.95rem; transition: all 0.25s;
+}
+.search-box input:focus { border-color: var(--accent-blue); background: rgba(0, 0, 0, 0.45); box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
+
+.search-submit-btn {
+    background: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%); color: white;
+    border: none; padding: 14px 28px; border-radius: 30px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.25s;
+}
+.search-submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3); }
+
+/* Segmentation Navigation Matrix Architecture styling Layout updates */
+.category-nav-container { margin: 0 auto 28px auto; width: 90%; max-width: 1200px; }
+.category-scroll { display: flex; align-items: center; gap: 16px; padding: 16px 24px; overflow-x: auto; scrollbar-width: none; }
+.category-scroll::-webkit-scrollbar { display: none; }
+
+.nav-segment { display: flex; align-items: center; gap: 8px; }
+.segment-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); font-weight: 700; margin-right: 6px; white-space: nowrap; }
+.nav-divider { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.08); flex-shrink: 0; }
+
+.nav-tab {
+    background: transparent; border: 1px solid transparent; color: var(--text-muted);
+    padding: 8px 18px; border-radius: 20px; font-weight: 600; font-size: 0.88rem; cursor: pointer; white-space: nowrap; transition: all 0.2s;
+}
+.nav-tab:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.04); }
+.nav-tab.active { background: rgba(255, 255, 255, 0.08); color: var(--text-main); border-color: rgba(255, 255, 255, 0.12); }
+.premium-badge { background: rgba(192, 132, 252, 0.08) !important; border: 1px solid rgba(192, 132, 252, 0.2) !important; color: #e9d5ff !important; }
+.premium-badge:hover { background: rgba(192, 132, 252, 0.15) !important; }
+
+/* ==========================================
+   3. PROFESSIONAL SYSTEM GRAPHIC GRID MATRICES
+   ========================================== */
+.page-layout { display: grid; grid-template-columns: 1fr 320px; gap: 32px; width: 90%; max-width: 1200px; margin: 0 auto; }
+.feed-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.category-badge { font-size: 0.72rem; background: rgba(192, 132, 252, 0.12); border: 1px solid rgba(192, 132, 252, 0.25); color: #f3e8ff; padding: 3px 10px; border-radius: 8px; font-weight: 700; letter-spacing: 0.5px; }
+
+.news-grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+.news-card { display: flex; flex-direction: column; overflow: hidden; height: 100%; }
+.news-card:hover { border-color: var(--glass-hover-border); background: var(--glass-hover-bg); transform: translateY(-4px); }
+
+/* STABLE PROPORTIONAL CROPPING CONTAINER FOR CARD GRAPHICS */
+.image-wrapper { 
+    position: relative; 
+    width: 100%; 
+    aspect-ratio: 16 / 10; /* Fixed aspect framing cuts out huge, layout breaking vertical footprints */
+    background: #060913; 
+    overflow: hidden; 
+}
+
+/* HARD CENTER OBJECT-FIT CROPPING FORCE LAYER */
+.image-wrapper img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover !important; /* Crops image correctly onto frame layout boundaries */
+    object-position: center center; 
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+.news-card:hover .image-wrapper img { transform: scale(1.05); }
+.source-badge { position: absolute; top: 12px; left: 12px; background: rgba(5, 8, 16, 0.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.06); color: var(--accent-blue); z-index: 2; }
+
+.news-content { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+.news-content h2 { font-size: 1.15rem; line-height: 1.4; margin-bottom: 8px; font-weight: 700; color: var(--text-main); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.news-content p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.55; margin-bottom: 20px; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+.meta-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 14px; margin-top: auto; }
+.date-stamp { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
+.action-buttons { display: flex; gap: 8px; }
+.glass-btn { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); color: var(--text-main); padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.2s; }
+.glass-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.2); }
+
+/* ==========================================
+   4. SIDEBAR & SKELETON LOADERS
+   ========================================== */
+.sidebar-panel { padding: 24px; height: fit-content; display: flex; flex-direction: column; gap: 24px; }
+.sidebar-panel h3 { font-size: 1.05rem; font-weight: 700; }
+.trending-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.trend-tag { width: 100%; text-align: left; background: rgba(0, 0, 0, 0.12); border: 1px solid var(--glass-border); color: var(--text-main); padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 0.88rem; font-weight: 500; transition: all 0.2s; }
+.trend-tag:hover { background: rgba(56, 189, 248, 0.04); border-color: var(--accent-blue); color: var(--accent-blue); transform: translateX(2px); }
+
+.newsletter-box h4 { font-size: 0.95rem; margin-bottom: 10px; font-weight: 600; }
+.telemetry-text { margin-top: 10px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+.status-indicator { padding: 5px 12px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; text-align: center; width: 100%; }
+.status-indicator.online { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.25); color: #4ade80; }
+.status-indicator.loading { background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.25); color: #facc15; }
+
+.skeleton-card { height: 320px; background: linear-gradient(90deg, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.01) 75%); background-size: 200% 100%; animation: glassShimmer 1.4s infinite linear; border-radius: 16px; border: 1px solid var(--glass-border); }
+@keyframes glassShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+/* ==========================================
+   5. LIGHTBOX MODAL OVERLAY EXTENSIONS
+   ========================================== */
+.news-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2, 4, 10, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; }
+.news-modal-window { width: 100%; max-width: 600px; overflow: hidden; position: relative; animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes modalPop { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.modal-close-trigger { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.12); color: white; font-size: 1.4rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; z-index: 10; line-height: 28px; text-align: center; }
+.modal-close-trigger:hover { background: rgba(239, 68, 68, 0.25); border-color: rgba(239, 68, 68, 0.4); }
+
+.modal-hero-wrapper { height: 250px; width: 100%; overflow: hidden; background: #000; }
+.modal-hero-wrapper img { width: 100%; height: 100%; object-fit: cover !important; object-position: center; }
+
+.modal-body-content { padding: 24px; }
+.modal-date-stamp { font-size: 0.75rem; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; display: inline-block; }
+.modal-body-content h2 { margin-bottom: 12px; font-size: 1.35rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.3px; }
+.modal-text-scroller { max-height: 160px; overflow-y: auto; margin-bottom: 20px; line-height: 1.6; color: var(--text-muted); font-size: 0.92rem; padding-right: 6px; }
+.modal-text-scroller::-webkit-scrollbar { width: 4px; }
+.modal-text-scroller::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+
+.modal-footer-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.spec-link { text-decoration: none; font-size: 0.85rem; padding: 10px 20px; text-align: center; }
+.variant-close { padding: 10px 20px; border-radius: 30px; }
+
+/* ==========================================
+   6. RESPONSIVE MEDIA QUERIES
+   ========================================== */
+@media (max-width: 950px) { 
+    .page-layout { grid-template-columns: 1fr; gap: 24px; } 
+    .search-section { padding: 32px 20px; }
+}
+@media (max-width: 768px) {
+    .category-scroll { flex-wrap: nowrap; padding-bottom: 12px; }
+    .nav-divider { display: none; }
+}
